@@ -78,4 +78,4 @@ function postTweet(txt) {
 }
 
 // tweet every hour
-// setInterval(postTweet, 1000*60*60);
+setInterval(postTweet("hello"), 1000*60*60);
