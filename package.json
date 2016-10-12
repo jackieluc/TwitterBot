@@ -1,0 +1,32 @@
+{
+  "name": "twitterbot",
+  "version": "1.0.0",
+  "description": "Twitter bot that can tweet, reply, favorite, or retweet related to puns.",
+  "main": "bot.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jackieluc/TwitterBot.git"
+  },
+  "keywords": [
+    "pun",
+    "puns",
+    "twitter",
+    "funny",
+    "a",
+    "little",
+    "punny",
+    "punny"
+  ],
+  "author": "Jackie Luc",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jackieluc/TwitterBot/issues"
+  },
+  "homepage": "https://github.com/jackieluc/TwitterBot#readme",
+  "dependencies": {
+    "twit": "^2.2.5"
+  }
+}
