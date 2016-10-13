@@ -36,5 +36,5 @@ jspm_packages
 # Optional REPL history
 .node_repl_history
 
-#ignore config.js files
-config.js
+#ignore credentials.json
+credentials.json

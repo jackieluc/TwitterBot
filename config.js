@@ -1,6 +1,6 @@
 module.exports = {
-    consumer_key:         'VPsvutacIa6GGipmKqD0vIdRi',
-    consumer_secret:      '3j2gjAe8P5zsyaSWsnKQsZumy3bQB2qMBgWAstxb62nSLWCWbz',
-    access_token:         '779099965222072320-i4vI4DrSnpRqOh9xJiWXsAuzeNcagLo',
-    access_token_secret:  'FOw2eqpUVNVLhAo2BqegKGMyMXpp3NUhUiRxvyncDolbR',
+    	consumer_key : process.env.CKEY || require('./credentials.json').twitter.consumer_key,
+      consumer_secret : process.env.CSECRET || require('./credentials.json').twitter.consumer_secret,
+      access_token : process.env.ATOKEN || require('./credentials.json').twitter.acess_token,
+      access_token_secret : process.env.ATSECRET || require('./credentials.json').twitter.acess_token_secret,
 }
