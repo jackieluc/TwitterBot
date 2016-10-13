@@ -1,8 +1,11 @@
-//import Twit
+// initialize twit, config, file system, filename
 var Twit = require('twit');
 var config = require('./config');
+var fs = require('fs');
+var readline = require('readline');
+var filename = 'puns.txt';
 
-// create new Twit with config (consumer key, access key)
+// create new Twit with config (twitter keys)
 var T = new Twit(config);
 
 // setting up a user stream (continuous stream to twitter)
@@ -22,9 +25,6 @@ function followed(event) {
 }
 
 // how to write to json file
-// // fs = file system (node)
-// var fs = require('fs');
-//
 // // javascript string into json
 // var json = JSON.stringify(tweet, null, 2);
 // fs.writeFile("tweet.json", json);
@@ -56,6 +56,7 @@ function getTweet(err, data, response) {
 // get tweets
 // T.get('search/tweets', parameters, getTweet);
 
+
 // posts tweets
 function postTweet(txt) {
   // list of tweets to send out
@@ -63,19 +64,37 @@ function postTweet(txt) {
     status: txt
   }
 
-  // function that deals with the response from tweeting, ie error handling when tweet exceeds 140 characters
-  function whenTweeted(err, data, response) {
-    if (err) {
-      console.log('Error when tweeting!');
-      console.log(err);
-    }
-    else {
-        console.log('Sending tweet... ' + tweetList.status);
-    }
+// function that deals with the response from tweeting, ie error handling when tweet exceeds 140 characters
+function whenTweeted(err, data, response) {
+  if (err) {
+    console.log('Error when sending tweet number ' + lineCount);
+    console.log(err);
   }
+  else {
+      console.log('Sending tweet number ' + lineCount + ' ... ' + tweetList.status);
+  }
+}
 
   T.post('statuses/update', tweetList, whenTweeted);
 }
 
-// tweet every hour
-setInterval(postTweet("hello"), 1000*60*60);
+// get the list of puns in an array
+var punArray = fs.readFileSync(filename).toString().split("\n");
+var lineCount = 0;
+
+// send puns to twitter every hour
+function sendPuns() {
+var interval = setInterval(function() {
+    if (lineCount < punArray.length) {
+      postTweet(punArray[lineCount++] + " #puns");
+    }
+  }, 36000000);
+
+  // clean up
+  if(lineCount >= punArray.length) {
+    clearInterval(interval);
+  }
+}
+
+
+sendPuns();
