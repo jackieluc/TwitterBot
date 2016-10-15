@@ -25,7 +25,7 @@ function SendTweet(twit) {
 }
 
 // method that sends the tweet in intervals of an hour between 7AM - 10PM MST
-method.sendTweet = function() {
+method.sendTweets = function() {
   var interval = setInterval(function() {
     if (moment().hour() < 24 && moment().hour() >= 0) {
       if (lineCount < punArray.length - 1 ) {

@@ -51,7 +51,7 @@ function getTweet(err, data, response) {
 // get tweets
 // T.get('search/tweets', parameters, getTweet);
 
-// @test
+// @test - send tweets to twitter
 var TweetSender = require('./tweetsender');
-var tweetSender = new TweetSender(T);
-tweetSender.sendTweet();
+var ts = new TweetSender(T);
+ts.sendTweets();
