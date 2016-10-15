@@ -51,29 +51,6 @@ function getTweet(err, data, response) {
 // get tweets
 // T.get('search/tweets', parameters, getTweet);
 
-
-// posts tweets
-function postTweet(tweetMsg) {
-  // list of tweets to send out
-  var tweet = {
-    status: tweetMsg
-  }
-
-  // function that deals with the response from tweeting, ie error handling when tweet exceeds 140 characters
-  function whenTweeted(err, data, response) {
-    if (err) {
-      console.log('Error when sending tweet number ' + lineCount);
-      console.log(err);
-    }
-    else {
-        console.log('Sending tweet number ' + lineCount + ' ... ' + tweetList.status);
-    }
-  }
-
-  T.post('statuses/update', tweetList, whenTweeted);
-}
-
-
 // @test
 var TweetSender = require('./tweetsender');
 var tweetSender = new TweetSender(T);
