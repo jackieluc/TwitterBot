@@ -1,5 +1,6 @@
-// initialize twit, config, file system, filename
+// initialize twit, moment, config, file system, filename
 var Twit = require('twit');
+var moment = require('moment');
 var config = require('./config');
 var fs = require('fs');
 var readline = require('readline');
@@ -23,11 +24,6 @@ function followed(event) {
   // use .@ if you want to add it to Tweets timeline
   postTweet('@' + twitterUsername + " Thanks for subscribing for puns!");
 }
-
-// how to write to json file
-// // javascript string into json
-// var json = JSON.stringify(tweet, null, 2);
-// fs.writeFile("tweet.json", json);
 
 function mentioned(event) {
   var replyTo = event.in_reply_to_screen_name;
@@ -58,10 +54,10 @@ function getTweet(err, data, response) {
 
 
 // posts tweets
-function postTweet(txt) {
+function postTweet(tweetMsg) {
   // list of tweets to send out
-  var tweetList = {
-    status: txt
+  var tweet = {
+    status: tweetMsg
   }
 
 // function that deals with the response from tweeting, ie error handling when tweet exceeds 140 characters
@@ -84,17 +80,47 @@ var lineCount = 0;
 
 // send puns to twitter every hour
 function sendPuns() {
-var interval = setInterval(function() {
-    if (lineCount < punArray.length) {
-      postTweet(punArray[lineCount++] + " #puns");
+  var interval = setInterval(function() {
+
+    // TODO: check if punArray.length end of array is empty
+    // run while within 7AM - 10PM
+    if (moment().hour() < 23 && moment().hour() > 7) {
+        if (lineCount < punArray.length) {
+          postTweet(punArray[lineCount] + " #puns");
+
+          //write to file to know where the program is pointing to the current tweet
+          fs.writeFile('currentTweet.json', JSON.stringify(punArray[lineCount] + ' ' + lineCount++, null, 2));
+        }
+        // clean up
+        if(lineCount >= punArray.length) {
+          clearInterval(interval);
+        }
     }
   }, 36000000);
-
-  // clean up
-  if(lineCount >= punArray.length) {
-    clearInterval(interval);
-  }
 }
 
+// @test
+function sendPunsTest() {
+  var interval = setInterval(function() {
 
-sendPuns();
+    // TODO: check if punArray.length end of array is empty
+    if (moment().hour() < 24 && moment().hour() >= 0) {
+        if (lineCount < punArray.length - 1 ) {
+
+          console.log('Sending tweet number: ' + lineCount + ' - ' + punArray[lineCount]);
+          fs.writeFile('currentTweet.json', JSON.stringify(punArray[lineCount] + ' ' + lineCount++, null, 2));
+        }
+
+        // clean up
+        if(lineCount >= punArray.length - 1) {
+          console.log('Exceeded pun list, add more puns to the list!');
+          clearInterval(interval);
+        }
+    }
+  }, 1000*1);
+}
+
+// sendPuns();
+
+// @test
+sendPunsTest();
