@@ -1,10 +1,9 @@
 // initialize twit, moment, config, file system, filename
 var Twit = require('twit');
-var moment = require('moment');
+// var moment = require('moment');
 var config = require('./config');
-var fs = require('fs');
-var readline = require('readline');
-var filename = 'puns.txt';
+// var fs = require('fs');
+// var filename = 'puns.txt';
 
 // create new Twit with config (twitter keys)
 var T = new Twit(config);
@@ -75,8 +74,8 @@ function postTweet(tweetMsg) {
 }
 
 // get the list of puns in an array
-var punArray = fs.readFileSync(filename).toString().split("\n");
-var lineCount = 0;
+// var punArray = fs.readFileSync(filename).toString().split("\n");
+// var lineCount = 0;
 
 // send puns to twitter every hour
 function sendPuns() {
@@ -88,7 +87,7 @@ function sendPuns() {
         if (lineCount < punArray.length - 1) {
           postTweet(punArray[lineCount] + " #puns");
 
-          //write to file to let programmer know where the program is pointing to the current tweet
+          // write to file to let programmer know the most recent weet that has been posted (for debugging)
           fs.writeFile('currentTweet.json', JSON.stringify(punArray[lineCount] + ' ' + lineCount++, null, 2));
         }
         // clean up
@@ -99,27 +98,9 @@ function sendPuns() {
   }, 36000000);
 }
 
-// @test
-function sendPunsTest() {
-  var interval = setInterval(function() {
-
-    if (moment().hour() < 24 && moment().hour() >= 0) {
-        if (lineCount < punArray.length - 1 ) {
-
-          console.log('Sending tweet number: ' + lineCount + ' - ' + punArray[lineCount]);
-          fs.writeFile('currentTweet.json', JSON.stringify(punArray[lineCount] + ' ' + lineCount++, null, 2));
-        }
-
-        // clean up
-        if(lineCount >= punArray.length - 1) {
-          console.log('Exceeded pun list, add more puns to the list!');
-          clearInterval(interval);
-        }
-    }
-  }, 1000*1);
-}
-
 // sendPuns();
 
 // @test
-sendPunsTest();
+var TweetSender = require('./tweetsender');
+var tweetSender = new TweetSender();
+tweetSender.sendTweet();
