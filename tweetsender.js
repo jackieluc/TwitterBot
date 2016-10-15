@@ -1,9 +1,3 @@
-/**
-*   Author: Jackie Luc
-*   Github: jackieluc
-*
-*   Opens and reads a file that consists of a list of puns and stores it in an array. Sends a tweet from the array every hour if the time is within 7AM - 10PM.
-*/
 var T = require('Twit');
 var moment = require('moment');
 var fs = require('fs');
