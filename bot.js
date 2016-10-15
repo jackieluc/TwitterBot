@@ -60,16 +60,16 @@ function postTweet(tweetMsg) {
     status: tweetMsg
   }
 
-// function that deals with the response from tweeting, ie error handling when tweet exceeds 140 characters
-function whenTweeted(err, data, response) {
-  if (err) {
-    console.log('Error when sending tweet number ' + lineCount);
-    console.log(err);
+  // function that deals with the response from tweeting, ie error handling when tweet exceeds 140 characters
+  function whenTweeted(err, data, response) {
+    if (err) {
+      console.log('Error when sending tweet number ' + lineCount);
+      console.log(err);
+    }
+    else {
+        console.log('Sending tweet number ' + lineCount + ' ... ' + tweetList.status);
+    }
   }
-  else {
-      console.log('Sending tweet number ' + lineCount + ' ... ' + tweetList.status);
-  }
-}
 
   T.post('statuses/update', tweetList, whenTweeted);
 }
@@ -82,17 +82,17 @@ var lineCount = 0;
 function sendPuns() {
   var interval = setInterval(function() {
 
-    // TODO: check if punArray.length end of array is empty
     // run while within 7AM - 10PM
     if (moment().hour() < 23 && moment().hour() > 7) {
-        if (lineCount < punArray.length) {
+        // last line is empty
+        if (lineCount < punArray.length - 1) {
           postTweet(punArray[lineCount] + " #puns");
 
-          //write to file to know where the program is pointing to the current tweet
+          //write to file to let programmer know where the program is pointing to the current tweet
           fs.writeFile('currentTweet.json', JSON.stringify(punArray[lineCount] + ' ' + lineCount++, null, 2));
         }
         // clean up
-        if(lineCount >= punArray.length) {
+        if(lineCount >= punArray.length - 1) {
           clearInterval(interval);
         }
     }
@@ -103,7 +103,6 @@ function sendPuns() {
 function sendPunsTest() {
   var interval = setInterval(function() {
 
-    // TODO: check if punArray.length end of array is empty
     if (moment().hour() < 24 && moment().hour() >= 0) {
         if (lineCount < punArray.length - 1 ) {
 
