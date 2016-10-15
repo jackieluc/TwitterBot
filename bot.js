@@ -73,34 +73,8 @@ function postTweet(tweetMsg) {
   T.post('statuses/update', tweetList, whenTweeted);
 }
 
-// get the list of puns in an array
-// var punArray = fs.readFileSync(filename).toString().split("\n");
-// var lineCount = 0;
-
-// send puns to twitter every hour
-function sendPuns() {
-  var interval = setInterval(function() {
-
-    // run while within 7AM - 10PM
-    if (moment().hour() < 23 && moment().hour() > 7) {
-        // last line is empty
-        if (lineCount < punArray.length - 1) {
-          postTweet(punArray[lineCount] + " #puns");
-
-          // write to file to let programmer know the most recent weet that has been posted (for debugging)
-          fs.writeFile('currentTweet.json', JSON.stringify(punArray[lineCount] + ' ' + lineCount++, null, 2));
-        }
-        // clean up
-        if(lineCount >= punArray.length - 1) {
-          clearInterval(interval);
-        }
-    }
-  }, 36000000);
-}
-
-// sendPuns();
 
 // @test
 var TweetSender = require('./tweetsender');
-var tweetSender = new TweetSender();
+var tweetSender = new TweetSender(T);
 tweetSender.sendTweet();
