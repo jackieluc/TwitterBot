@@ -1,7 +1,6 @@
-// initialize twit, moment, config, file system, filename
 var Twit = require('twit');
-// var moment = require('moment');
 var config = require('./config');
+// var moment = require('moment');
 // var fs = require('fs');
 // var filename = 'puns.txt';
 
@@ -17,27 +16,27 @@ userStream.on('tweet', mentioned);
 
 // handles when a user follows me
 function followed(event) {
-  var name = event.source.name;
-  var twitterUsername = event.source.source_name;
+    var name = event.source.name;
+    var twitterUsername = event.source.source_name;
 
-  // use .@ if you want to add it to Tweets timeline
-  postTweet('@' + twitterUsername + " Thanks for subscribing for puns!");
+    // use .@ if you want to add it to Tweets timeline
+    postTweet('@' + twitterUsername + " Thanks for subscribing for puns!");
 }
 
 function mentioned(event) {
-  var replyTo = event.in_reply_to_screen_name;
-  var text = event.text;
-  var from = event.user.screen_name;
+    var replyTo = event.in_reply_to_screen_name;
+    var text = event.text;
+    var from = event.user.screen_name;
 
-  if (replyTo === 'alittlepunny') {
-    postTweet('@' + from + ' hmm...');
-  }
+    if (replyTo === 'alittlepunny') {
+        postTweet('@' + from + ' hmm...');
+    }
 }
 
 // parameters for searching for tweets
 var parameters = {
-  q: 'pun since:2014-07-11',
-  count: 5
+      q: 'pun since:2014-07-11',
+      count: 5
 }
 
 // function that gets the tweet data and prints it to console
