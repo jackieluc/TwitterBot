@@ -7,37 +7,14 @@ var config = require('./config');
 // create new Twit with config (twitter keys)
 var T = new Twit(config);
 
-// setting up a user stream (continuous stream to twitter)
-var userStream = T.stream('user');
-
-// anytime someone follows me or mentions me
-userStream.on('follow', followed);
-userStream.on('tweet', mentioned);
-
-// handles when a user follows me
-function followed(event) {
-    var name = event.source.name;
-    var twitterUsername = event.source.source_name;
-
-    // use .@ if you want to add it to Tweets timeline
-    postTweet('@' + twitterUsername + " Thanks for subscribing for puns!");
-}
-
-function mentioned(event) {
-    var replyTo = event.in_reply_to_screen_name;
-    var text = event.text;
-    var from = event.user.screen_name;
-
-    if (replyTo === 'alittlepunny') {
-        postTweet('@' + from + ' hmm...');
-    }
-}
+/* get tweet from query
 
 // parameters for searching for tweets
 var parameters = {
     q: 'pun since:2014-07-11',
     count: 5
 }
+
 
 // function that gets the tweet data and prints it to console
 function getTweet(err, data, response) {
@@ -48,11 +25,17 @@ function getTweet(err, data, response) {
 }
 
 // get tweets
-// T.get('search/tweets', parameters, getTweet);
+T.get('search/tweets', parameters, getTweet);
+*/
 
-// @test - send tweets to twitter
+
+// @test - send tweets to console
 var SendTweet = require('./sendtweet');
 var sender = new SendTweet(T);
 var intervalInMS = 1000*1;
 
 sender.sendInterval(intervalInMS);
+
+// @test - react to a following
+var React = require('./react');
+React(T, sender);

@@ -1,3 +1,5 @@
+var method = SendTweet.prototype;
+
 var T = null;
 var moment = require('moment');
 var fs = require('fs');
@@ -5,8 +7,6 @@ var filename = null;
 
 var lineCount = 0;
 var punArray = [];
-
-var method = SendTweet.prototype;
 
 function SendTweet(twit) {
     if (twit !== null)    T = twit;
@@ -19,7 +19,7 @@ function SendTweet(twit) {
 }
 
 // method that sends the tweet in intervals of an hour between 7AM - 10PM MST
-method.sendInterval = function(interval) {
+method.sendInterval = function(intervalInMS) {
     var tweetInterval = setInterval(function() {
         if (moment().hour() < 24 && moment().hour() >= 0) {
             if (lineCount < punArray.length - 1 ) {
@@ -34,11 +34,11 @@ method.sendInterval = function(interval) {
               clearInterval(tweetInterval);
           }
       }
-  }, interval);
+  }, intervalInMS);
 };
 
 // posts tweets
-function postTweet(tweetMsg) {
+method.postTweet = function(tweetMsg) {
   // list of tweets to send out
     var tweet = { status: tweetMsg }
 
@@ -49,11 +49,11 @@ function postTweet(tweetMsg) {
             console.error(err);
         }
         else {
-            console.log('Sending tweet number ' + lineCount + ' ... ' + tweetList.status);
+            console.log('Sending twee: ' + tweet.status);
         }
     }
 
-    T.post('statuses/update', tweetList, whenTweeted);
+    T.post('statuses/update', tweet, whenTweeted);
 }
 
 /* original tweet method
