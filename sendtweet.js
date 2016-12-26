@@ -38,10 +38,11 @@ method.sendInterval = function(intervalInMS)
         // check if it is between 7AM and 10PM MST
         if (moment().hour() < 22 && moment().hour() > 7)
         {
-            if (currentPunLine < punArray.length - 1 )
+            // if (currentPunLine < punArray.length - 1 )
+            if (currentPunLine == 0 )
             {
                 // post the tweet
-                postTweet(punArray[currentPunLine] + ' #puns #punny');
+                this.postTweet(punArray[currentPunLine] + ' #puns #punny');
 
                 console.log('Sending tweet number: ' + currentPunLine + ' - ' + punArray[currentPunLine]);
 
@@ -60,7 +61,7 @@ method.sendInterval = function(intervalInMS)
 };
 
 // posts a tweet
-method.postTweet = function(tweetMsg)
+postTweet = function(tweetMsg)
 {
     // list of tweets to send out
     var tweet = { status: tweetMsg }
