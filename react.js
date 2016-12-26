@@ -20,7 +20,8 @@ function React(twit, tweetSender)
     userStream = T.stream('user');
 
     // anytime someone follows me or mentions me
-    userStream.on('follow', followed);
+    // TODO: handle follows? good idea?
+    // userStream.on('follow', followed);
     userStream.on('tweet', mentioned);
 }
 
