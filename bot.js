@@ -32,7 +32,7 @@ T.get('search/tweets', parameters, getTweet);
 // send tweets every 5 hours
 var SendTweet = require('./sendtweet');
 var sender = new SendTweet(T);
-var intervalInMS = 1000*1;
+var intervalInMS = 18000000;
 
 sender.sendInterval(intervalInMS);
 
