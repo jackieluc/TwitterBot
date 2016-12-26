@@ -29,13 +29,13 @@ T.get('search/tweets', parameters, getTweet);
 */
 
 
-// @test - send tweets to console
+// send tweets every 5 hours
 var SendTweet = require('./sendtweet');
 var sender = new SendTweet(T);
-var intervalInMS = 1000*1;
+var intervalInMS = 18000000;
 
 sender.sendInterval(intervalInMS);
 
-// @test - react to a following
+// react to follows and mentions
 var React = require('./react');
 React(T, sender);

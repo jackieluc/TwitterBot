@@ -9,7 +9,7 @@
 <h3 align="center"> Description: </h3>
 <table style="width:50%", align="center">
     <tr>
-        <td style="width:25%"><a href="https://twitter.com/alittlepunny"><img src="node_modules/images/profile.png" width="100%"></a></td>
+        <td style="width:25%"><a href="https://twitter.com/alittlepunny"><img src="assets/images/profile.png" width="100%"></a></td>
         <td style="width:25%"><p>
             Uses Twit API to create a bot that sends puns to a Twitter account: <a href="https://twitter.com/alittlepunny">@alittlepunny</a>, every few hours between 7AM - 10PM MST.
         </p></td>

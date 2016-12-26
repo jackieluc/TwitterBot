@@ -1,6 +1,6 @@
 {
   "name": "twitterbot",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Twitter bot that can tweet, reply, favorite, or retweet related to puns.",
   "main": "bot.js",
   "scripts": {
@@ -17,7 +17,6 @@
     "funny",
     "a",
     "little",
-    "punny",
     "punny"
   ],
   "author": "Jackie Luc",
@@ -25,7 +24,7 @@
   "bugs": {
     "url": "https://github.com/jackieluc/TwitterBot/issues"
   },
-  "homepage": "https://github.com/jackieluc/TwitterBot#readme",
+  "homepage": "https://twitter.com/alittlepunny",
   "dependencies": {
     "twit": "^2.2.5"
   }
