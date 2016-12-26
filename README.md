@@ -11,7 +11,7 @@
     <tr>
         <td style="width:25%"><a href="https://twitter.com/alittlepunny"><img src="assets/images/profile.png" width="100%"></a></td>
         <td style="width:25%"><p>
-            Uses Twit API to create a bot that sends puns to a Twitter account: <a href="https://twitter.com/alittlepunny">@alittlepunny</a>, every few hours between 7AM - 10PM MST.
+            Uses Twit API to create a bot that sends puns to a Twitter account: <a href="https://twitter.com/alittlepunny">@alittlepunny</a>, every few hours between 7AM and 10PM MST.
         </p></td>
     </tr>
 </table>
@@ -20,7 +20,7 @@
 
 <h3 align="center"> Upcoming features: </h3>
 <div align="center">
+    <li> reply to mentions (working)</li>
     <li> look for tweets and comments </li>
-    <li> reply to mentions </li>
     <li> reply to followings (?) </li>
 </div>

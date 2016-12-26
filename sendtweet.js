@@ -4,6 +4,7 @@ var T = null;
 var moment = require('moment');
 var fs = require('fs');
 var filename = null;
+var lastKnownTweet = require('./currentTweet.json');
 
 var currentPunLine = 0;
 var punArray = [];
@@ -27,14 +28,26 @@ method.sendInterval = function(intervalInMS)
 {
     var tweetInterval = setInterval(function()
     {
+        // check if there was a last known tweet... this ensures that the bot does not restart from the first pun in the list
+        if (lastKnownTweet.lineNum > currentPunLine)
+        {
+            currentPunLine = lastKnownTweet.lineNum;
+            console.log('Starting where we last left off on tweet number: ' + currentPunLine);
+        }
+
+        // check if it is between 7AM and 10PM MST
         if (moment().hour() < 22 && moment().hour() > 7)
         {
             if (currentPunLine < punArray.length - 1 )
             {
-                postTweet(punArray[currentPunLine] + ' #puns #dailydoseofpuns');
+                // post the tweet
+                postTweet(punArray[currentPunLine] + ' #puns #punny');
 
                 console.log('Sending tweet number: ' + currentPunLine + ' - ' + punArray[currentPunLine]);
-                fs.writeFile('currentTweet.json', JSON.stringify(punArray[currentPunLine] + ' ' + currentPunLine++, null, 2));
+
+                // write to file to know when the last known tweet is
+                var obj = {tweet: punArray[currentPunLine], lineNum: currentPunLine++};
+                fs.writeFile('currentTweet.json', JSON.stringify(obj));
             }
             // clean up
             if(currentPunLine >= punArray.length - 1)

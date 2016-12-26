@@ -38,4 +38,3 @@ jspm_packages
 
 #ignore .json files that don't need to be shown in public github
 credentials.json
-currentTweet.json
