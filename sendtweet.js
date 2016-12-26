@@ -41,7 +41,7 @@ method.sendInterval = function(intervalInMS)
             if (currentPunLine < punArray.length - 1 )
             {
                 // post the tweet
-                postTweet(punArray[currentPunLine] + ' #puns #punny');
+                postTweet(punArray[currentPunLine] + ' #punny #puns');
 
                 console.log('Sending tweet number: ' + currentPunLine + ' - ' + punArray[currentPunLine]);
 
